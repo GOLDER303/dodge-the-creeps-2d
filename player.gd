@@ -20,8 +20,21 @@ func _process(delta):
         direction.y -= 1
 
     direction = direction.normalized()
-
     position += direction * speed * delta
 
     position.x = clamp(position.x, 0, screen_size.x)
     position.y = clamp(position.y, 0, screen_size.y)
+
+    if direction.length() > 0:
+        $AnimatedSprite2D.play()
+    else:
+        $AnimatedSprite2D.stop()
+
+    if direction.x != 0:
+        $AnimatedSprite2D.animation = "right"
+        $AnimatedSprite2D.flip_h = direction.x < 0
+        $AnimatedSprite2D.flip_v = false
+
+    elif direction.y != 0:
+        $AnimatedSprite2D.animation = "up"
+        $AnimatedSprite2D.flip_v = direction.y > 0
