@@ -46,6 +46,12 @@ one_shot = true
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 437)
 
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_cjxuq")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_w70qe")
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
