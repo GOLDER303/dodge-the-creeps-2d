@@ -8,6 +8,8 @@ var screen_size = Vector2.ZERO
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	hide()
+
 
 func _process(delta):
 	var direction = Vector2.ZERO
@@ -41,6 +43,12 @@ func _process(delta):
 	elif direction.y != 0:
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = direction.y > 0
+
+
+func start(new_position: Vector2):
+	position = new_position
+	show()
+	$CollisionShape2D.disabled = false
 
 
 func _on_body_entered(_body: Node2D):

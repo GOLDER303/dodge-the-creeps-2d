@@ -5,6 +5,34 @@ extends Node
 var score = 0
 
 
+func _ready():
+	randomize()
+
+
+func new_game():
+	score = 0
+	$HUD.update_score(score)
+
+	get_tree().call_group("Mobs", "queue_free")
+	$Player.start($StartPosition.position)
+
+	$StartTimer.start()
+	$HUD.show_message("Get ready...")
+	$Music.play()
+
+	await $StartTimer.timeout
+
+	$ScoreTimer.start()
+	$MobTimer.start()
+
+
+func game_over():
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+	$HUD.show_game_over()
+	$Music.stop()
+	$DeathSound.play()
+
 
 func _on_mob_timer_timeout():
 	var mob_spawn_location: PathFollow2D = $MobPath/MobSpawnLocation
