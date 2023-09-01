@@ -2,6 +2,9 @@ extends Node
 
 @export var mob_scene: PackedScene
 
+var score = 0
+
+
 
 func _on_mob_timer_timeout():
 	var mob_spawn_location: PathFollow2D = $MobPath/MobSpawnLocation
@@ -19,3 +22,7 @@ func _on_mob_timer_timeout():
 	var velocity = Vector2(randf_range(mob.min_speed, mob.max_speed), 0)
 	mob.linear_velocity = velocity.rotated(direction)
 
+
+func _on_score_timer_timeout():
+	score += 1
+	$HUD.update_score(score)
